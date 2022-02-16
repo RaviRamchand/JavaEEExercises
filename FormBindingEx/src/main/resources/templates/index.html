@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Games</title>
+</head>
+
+<link rel="stylesheet" th:href="@{/style.css}">
+<body>
+
+<!-- Table to display all the game input by user -->
+<table>
+    <tr>
+        <th>Game Name</th>
+        <th>Publisher</th>
+        <th>Platform</th>
+        <th>Price</th>
+    </tr>
+    <!-- For each loop to loop through all the content within gameList-->
+    <!-- Add static data to be replaced. Displays if couldn't find anything-->
+    <tr th:each="g:${gameList}">
+        <td th:text="${g.getGameTitle()}">Spider-Man</td>
+        <td th:text="${g.getPublisher()}">Insomniac</td>
+        <td th:text="${g.getPlatform()}">Playstation</td>
+        <td th:text="${g.getGamePrice()}">30</td>
+    </tr>
+</table>
+
+<hr>
+<br><br>
+
+<!-- Input form with same action as PostMapping method from GameController-->
+<!-- th:object for form binding-->
+<form method="post" th:action="@{/addGame}" th:object="${games}">
+    Game Name: <input type="text" th:name="gameName" th:field="*{gameTitle}">
+    Publisher: <input type="text" th:name="gamePublisher" th:field="*{publisher}">
+    Platform: <select th:field="*{platform}">
+    <option th:each="g:*{platforms}" th:value="${g}" th:text="${g}"></option></select>
+    Price: <input type="number" step="0.01" th:field="*{gamePrice}">
+
+    <input type="submit" value="Add Game">
+</form>
+
+</body>
+</html>
