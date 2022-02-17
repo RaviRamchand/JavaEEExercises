@@ -1,0 +1,18 @@
+body {
+    text-align: center;
+}
+form {
+    display: inline-block;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+table{
+    width:100%;
+}
+
+h1{
+    text-align: center;
+}
