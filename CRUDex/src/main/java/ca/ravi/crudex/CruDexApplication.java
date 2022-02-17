@@ -1,0 +1,13 @@
+package ca.ravi.crudex;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CruDexApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CruDexApplication.class, args);
+    }
+
+}
