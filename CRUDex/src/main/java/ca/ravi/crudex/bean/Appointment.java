@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 public class Appointment implements Serializable {
-    private Long id;
+    private long id;
     private String firstName;
     private String email;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
