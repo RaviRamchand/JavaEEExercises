@@ -35,11 +35,38 @@ public class DatabaseAccess {
     }
 
     //Deletes a specific appointment using the id
-    public void deleteId(Long id){
+    public void deleteId(long id){
         MapSqlParameterSource namedParameter = new MapSqlParameterSource();
         String query = "DELETE FROM Appointment WHERE id = :id";
         namedParameter.addValue("id", id);
 
         jdbc.update(query, namedParameter);
+    }
+
+    //Get the record that has the wanted id and sends it back to the controller
+    public List<Appointment> getAppointment(long id){
+        MapSqlParameterSource namedParameter = new MapSqlParameterSource();
+        String query = "SELECT * FROM Appointment WHERE id=:id";
+        namedParameter.addValue("id", id);
+
+        return jdbc.query(query, namedParameter, new BeanPropertyRowMapper<>(Appointment.class));
+    }
+
+    //Updates the record with whatever the user replaces original content with
+    public void updateAppointment(Appointment appointment){
+        MapSqlParameterSource namedParameter = new MapSqlParameterSource();
+        String query = "UPDATE Appointment SET FirstName=:FirstName, Email=:Email," +
+                "AppointmentDate=:AppointmentDate, AppointmentTime=:AppointmentTime WHERE id=:id";
+        namedParameter.addValue("FirstName", appointment.getFirstName());
+        namedParameter.addValue("id", appointment.getId());
+        namedParameter.addValue("Email", appointment.getEmail());
+        namedParameter.addValue("AppointmentDate", appointment.getAppointmentDate());
+        namedParameter.addValue("AppointmentTime", appointment.getAppointmentTime());
+
+        int rowsAffected = jdbc.update(query, namedParameter);
+
+        if(rowsAffected>0){
+            System.out.println("Table updated");
+        }
     }
 }
