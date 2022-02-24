@@ -16,3 +16,7 @@ table{
 h1{
     text-align: center;
 }
+
+a:visited{
+    color: blue;
+}
